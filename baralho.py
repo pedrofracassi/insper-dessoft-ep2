@@ -1,8 +1,8 @@
-def extrai_naipe(carta):
+def extrai_valor(carta):
     if len(carta)==3:
-        return carta[2]
-    else:    
-        return carta[1]
+        return carta[0]+carta[1]
+    else:
+        return carta[0]
 
 def extrai_naipe(carta):
     if len(carta)==3:
@@ -13,3 +13,15 @@ def extrai_naipe(carta):
 def cria_baralho():
     baralho = ['2♠','3♠','4♠','5♠','6♠','7♠','8♠','9♠','10♠','J♠','A♠','K♠','Q♠','2♥','3♥','4♥','5♥','6♥','7♥','8♥','9♥','10♥','J♥','A♥','K♥','Q♥','2♦','3♦','4♦','5♦','6♦','7♦','8♦','9♦','10♦','J♦','A♦','K♦','Q♦','2♣','3♣','4♣','5♣','6♣','7♣','8♣','9♣','10♣','J♣','A♣','K♣','Q♣']
     return baralho
+
+def lista_movimentos_possiveis (baralho, i):
+    movs_validos = [1, 3]
+    movs_possiveis = []
+
+    for mov in movs_validos:
+        if i < mov:
+            continue
+        if extrai_naipe(baralho[i]) == extrai_naipe(baralho[i-mov]) or extrai_valor(baralho[i]) == extrai_valor(baralho[i-mov]):
+            movs_possiveis.append(mov)
+
+    return movs_possiveis
