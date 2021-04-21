@@ -1,7 +1,7 @@
 def nlembroonome(baralho):
     listanaipe = []
     for carta in baralho:
-        if carta[0]+carta[1]) == "10":
+        if carta[0]+carta[1] == "10":
             if carta[2] not in listanaipe:
                 listanaipe.append(carta[2])
         elif carta[1] not in listanaipe:
