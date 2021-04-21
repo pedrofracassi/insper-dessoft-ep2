@@ -25,25 +25,30 @@ def lista_movimentos_possiveis (baralho, i):
             movs_possiveis.append(mov)
 
     return movs_possiveis
-
-
-def nlembroonome(baralho):
-    listanaipe = []
-    for carta in baralho:
-        if carta[0]+carta[1] == "10":
-            if carta[2] not in listanaipe:
-                listanaipe.append(carta[2])
-        elif carta[1] not in listanaipe:
-            listanaipe.append(carta[1])
-        else:
-            return True 
-    listanumero = []
-    for carta in baralho:
-        if carta[0]+carta[1] == '10':
-            if carta[2] not in listanumero:
-                listanumero.append(carta[2])
-        elif carta[1] not in listanumero:
-            listanumero.append(carta[1])
-        else:
+    
+def empilha(lista,ppartida,pchegada):
+    lista[pchegada] = lista[ppartida]
+    del lista[ppartida]
+    return lista
+   
+def possui_movimentos_possiveis(baralho):
+    i=0
+    o=1
+    while len(baralho) >o:
+        if extrai_naipe(baralho[i])==extrai_naipe(baralho[o]) or extrai_valor(baralho[i])==extrai_valor(baralho[o]):
             return True
-    return False      
+        i+=1
+        o=i+1
+    baralhoinvertido = []
+    i=len(baralho) - 1
+    while i>0:
+        baralhoinvertido.append(baralho[i])
+        i-=1
+    i=0
+    o=3
+    while len(baralho)>o+1:
+        if extrai_naipe(baralho[i])==extrai_naipe(baralho[o]) or extrai_valor(baralho[i])==extrai_valor(baralho[o]):
+            return True
+        i+=1
+        o=i+3
+    return False   
