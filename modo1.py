@@ -2,7 +2,22 @@ from baralho import cria_baralho
 from baralho import possui_movimentos_possiveis
 from baralho import lista_movimentos_possiveis
 from baralho import empilha
+from baralho import extrai_naipe
+import colorama
 x= cria_baralho()
+def pinta_baralho(x):
+    for carta in x:
+        if extrai_naipe(carta) == '♠':
+            carta = colorama.Fore.RED, '{}'.format(carta),colorama.Fore.RESET
+        if extrai_naipe(carta)== '♦':
+            carta = colorama.Fore.CYAN,'{}'.format(carta),colorama.Fore.RESET
+        if extrai_naipe(carta) == '♥':
+            carta = colorama.Fore.MAGENTA,'{}'.format(carta),colorama.Fore.RESET
+        else:
+            carta = colorama.Fore.YELLOW,'{}'.format(carta),colorama.Fore.RESET                
+    return x
+y= cria_baralho()
+x = pinta_baralho(y)            
 while possui_movimentos_possiveis(x):
     i=1
     for carta in x:
