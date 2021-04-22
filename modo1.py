@@ -2,7 +2,6 @@ from baralho import cria_baralho
 from baralho import possui_movimentos_possiveis
 from baralho import lista_movimentos_possiveis
 from baralho import empilha
-import random
 x= cria_baralho()
 while possui_movimentos_possiveis(x):
     i=1
@@ -18,14 +17,19 @@ while possui_movimentos_possiveis(x):
         if len(mov)==1:
             novasequencia=empilha(x,(numero-1),mov[0])
         elif len(mov)>1:
-            print('Sobre qual carta você deseja empilhar? ') 
-            pergunta1 = int(input('Qual movimento deseja executar {} ou {}?'.format(mov[0],mov[1])))
-            novasequencia=(x,numero-1,mov[pergunta1])  
+            print('Sobre qual carta você deseja empilhar? ')
+            c0=x[numero-1]
+            c1=x[numero-3]           
+            print('Qual movimento deseja executar 1 ou 2?')
+            print('1. {}'.format(c0)) 
+            print('2. {}'.format(c1))
+            pergunta1 = int(input(' '))
+            novasequencia=empilha(x,numero-1,mov[pergunta1-1])  
     x=novasequencia       
-#TODO: MEXER NA LINHA 22 PRA APARECER A CARTA AO INVES DO MOVIMENTO 
-# TODO:POR COR
-# TODO: MENSAGEM SE PERDER OU GANHAR    
-                  
+if len(x)>1:
+    return 'Que pena,você perdeu!Continue tentando'
+if len(x)==1:
+    return 'Parabéns,você ganhou!'                      
 
 
 
