@@ -1,5 +1,8 @@
 import baralho
 
+# TODO: Cores das cartas
+# TODO: Posicionamento melhor dos naipes
+
 def carta_ascii (carta):
   naipe = baralho.extrai_naipe(carta)
   valor = baralho.extrai_valor(carta)
