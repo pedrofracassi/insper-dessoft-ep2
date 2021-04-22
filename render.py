@@ -9,13 +9,13 @@ def carta_ascii (carta):
 
   return [
     '┌─────────┐',
-    '│         │',
+    '│{}        │'.format(valor),
     '│         │',
     '│         │',
     '│    {}    │'.format(naipe),
     '│         │',
     '│         │',
-    '│         │',
+    '│        {}│'.format(valor),
     '└─────────┘'
   ]
 
@@ -35,7 +35,6 @@ def linha_cartas (cartas):
 
       linhas[i] += linha
 
-  return linhas
+  return '\n'.join(linhas)
 
-for a in linha_cartas(['2♠','3♠']):
-  print(a)
+print(linha_cartas(['2♠','3♠','4♠','5♠','6♠','7♠','8♠','9♠']))
