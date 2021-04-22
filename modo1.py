@@ -2,6 +2,7 @@ from baralho import cria_baralho
 from baralho import possui_movimentos_possiveis
 from baralho import lista_movimentos_possiveis
 from baralho import empilha
+import random
 x= cria_baralho()
 while possui_movimentos_possiveis(x):
     i=1
@@ -21,6 +22,9 @@ while possui_movimentos_possiveis(x):
             pergunta1 = int(input('Qual movimento deseja executar {} ou {}?'.format(mov[0],mov[1])))
             novasequencia=(x,numero-1,mov[pergunta1])  
     x=novasequencia       
+#TODO: MEXER NA LINHA 22 PRA APARECER A CARTA AO INVES DO MOVIMENTO 
+# TODO:POR COR
+# TODO: MENSAGEM SE PERDER OU GANHAR    
                   
 
 
