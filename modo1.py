@@ -17,7 +17,7 @@ while possui_movimentos_possiveis(x):
         if len(mov)==1:
             novasequencia=empilha(x,(numero-1),mov[0])
         elif len(mov)>1:
-            print('Sobre qual carta você deseja empilhar?')
+            print('Sobre qual carta você deseja empilhar? ') 
             pergunta1 = int(input('Qual movimento deseja executar {} ou {}?'.format(mov[0],mov[1])))
             novasequencia=(x,numero-1,mov[pergunta1])  
     x=novasequencia       
