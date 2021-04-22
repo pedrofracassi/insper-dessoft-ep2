@@ -1,5 +1,6 @@
 import utils
 
-utils.limpa_tela()
-print('Hello')
-print('World')
+while True:
+  utils.limpa_tela()
+  print('\033[91mHello\033[0mWorld')
+  input()
