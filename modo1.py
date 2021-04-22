@@ -27,9 +27,9 @@ while possui_movimentos_possiveis(x):
             novasequencia=empilha(x,numero-1,mov[pergunta1-1])  
     x=novasequencia       
 if len(x)>1:
-    return 'Que pena,você perdeu!Continue tentando'
+    print('Que pena,você perdeu!Continue tentando')
 if len(x)==1:
-    return 'Parabéns,você ganhou!'                      
+    print('Parabéns,você ganhou!')                      
 
 
 
