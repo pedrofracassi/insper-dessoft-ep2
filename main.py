@@ -1,6 +1,5 @@
-import utils
+import telas
 
 while True:
-  utils.limpa_tela()
-  print('\033[91mHello\033[0mWorld')
-  input()
+  telas.menu()
+  telas.regras()
