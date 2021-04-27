@@ -24,7 +24,7 @@ while baralho.possui_movimentos_possiveis(x):
     if numero>len(x):
         while numero>len(x):
             numero=int(input('Escolha uma carta e digite um número entre {} e {}: '.format(1,len(x))))
-    if baralho.lista_movimentos_possiveis(x,(numero-1))==[]:
+    while baralho.lista_movimentos_possiveis(x,(numero-1))==[]:
         print('A carta {} não pode ser movida. Por favor, digite um número entre 1 e {} :'.format(1,len(x)))
         numero=int(input('Escolha uma carta e digite um número entre {} e {}: '.format(1,len(x))))
     if len(baralho.lista_movimentos_possiveis(x,(numero-1))) > 0:
