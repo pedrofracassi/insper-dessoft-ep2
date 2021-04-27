@@ -1,9 +1,10 @@
 import baralho
 import utils
 import render
+import random
 
 x = baralho.cria_baralho()
-
+random.shuffle(x)
 while baralho.possui_movimentos_possiveis(x):
     utils.limpa_tela()
     i=1
