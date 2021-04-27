@@ -44,5 +44,3 @@ def linha_cartas (cartas):
       linhas[i] += linha
 
   return '\n'.join(linhas)
-
-print(linha_cartas(['2♠','3♠','4♠','5♠','6♠','7♠','8♠','9♠']))
