@@ -1,3 +1,5 @@
+import random
+
 def extrai_valor(carta):
     if len(carta)==3:
         return carta[0]+carta[1]
@@ -12,6 +14,7 @@ def extrai_naipe(carta):
 
 def cria_baralho():
     baralho = ['2♠','3♠','4♠','5♠','6♠','7♠','8♠','9♠','10♠','J♠','A♠','K♠','Q♠','2♥','3♥','4♥','5♥','6♥','7♥','8♥','9♥','10♥','J♥','A♥','K♥','Q♥','2♦','3♦','4♦','5♦','6♦','7♦','8♦','9♦','10♦','J♦','A♦','K♦','Q♦','2♣','3♣','4♣','5♣','6♣','7♣','8♣','9♣','10♣','J♣','A♣','K♣','Q♣']
+    random.shuffle(baralho)
     return baralho
 
 def lista_movimentos_possiveis (baralho, i):

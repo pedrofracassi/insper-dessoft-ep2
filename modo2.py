@@ -1,5 +1,4 @@
 import baralho
-import render
 import colorama
 
 # TODO: Cores das cartas

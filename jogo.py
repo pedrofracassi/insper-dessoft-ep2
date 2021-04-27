@@ -1,6 +1,5 @@
 import baralho
 import utils
-import render
 
 def iniciar (renderiza_cartas):
     x = baralho.cria_baralho()
