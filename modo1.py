@@ -11,4 +11,4 @@ def carta_colorida(carta):
 def renderiza (baralho):
     for i, carta in enumerate(baralho):
         tem_movs_possiveis = bar.lista_movimentos_possiveis(baralho, i)
-        print(colorama.Fore.YELLOW if tem_movs_possiveis else colorama.Fore.WHITE, '{}.'.format(i), carta_colorida(carta))
+        print(colorama.Fore.YELLOW if tem_movs_possiveis else colorama.Fore.WHITE, '{}.'.format(i+1), carta_colorida(carta))
