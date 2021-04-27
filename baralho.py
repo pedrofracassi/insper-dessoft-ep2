@@ -29,7 +29,7 @@ def lista_movimentos_possiveis (baralho, i):
 
     return movs_possiveis
     
-def empilha(lista,ppartida,pchegada):
+def empilha(lista, ppartida, pchegada):
     lista[pchegada] = lista[ppartida]
     del lista[ppartida]
     return lista

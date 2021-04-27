@@ -1,26 +1,38 @@
 import baralho
 import utils
 
-def input_validado (texto_primeiro, texto_erro, validacao, tuple_args):
+def input_validado (texto_primeiro, validacao, tuple_args):
   resultado = input(texto_primeiro)
-  while not validacao(resultado, *tuple_args):
+  while not validacao(resultado, *tuple_args)[0]:
+    erro, texto_erro = validacao(resultado, *tuple_args)
     resultado = input(texto_erro)
 
   return resultado
 
-def valida_input_numero (resultado, min, max, x):
+def valida_input_carta (resultado, min, max, x):
   try:
     int(resultado)
   except:
-    return False
+    return False, f'O valor digitado não é um número. Escolha um número entre {1} e {len(x)}: '
 
   if int(resultado) > max or int(resultado) < min:
-    return False
+    return False, f'Número inválido. Escolha um número entre {1} e {len(x)}: ',
   
-  if  baralho.lista_movimentos_possiveis(x,(int(resultado)-1))==[]:
-    return False, f'A carta {resultado} não pode ser movida. Por favor, digite um número entre 1 e {len(x)} :'
+  if baralho.lista_movimentos_possiveis(x, (int(resultado)-1))==[]:
+    return False, f'A carta {resultado} não pode ser movida. Por favor, digite um número entre 1 e {len(x)}: '
 
-  return True
+  return True, ''
+
+def valida_input_movimento (resultado):
+  try:
+    int(resultado)
+  except:
+    return False, 'O valor digitado não é um número. Escolha 1 ou 2: '
+
+  if int(resultado) not in [1, 2]:
+    return False, 'Número inválido. Escolha 1 ou 2: ',
+
+  return True, ''
 
 def iniciar (renderiza_cartas):
     x = baralho.cria_baralho()
@@ -31,8 +43,7 @@ def iniciar (renderiza_cartas):
 
         numero = int(input_validado(
           f'Escolha uma carta e digite um número entre {1} e {len(x)}: ',
-          f'Número inválido. Escolha um número entre {1} e {len(x)}: ',
-          valida_input_numero,
+          valida_input_carta,
           (1, len(x), x)
         ))
 
@@ -51,16 +62,20 @@ def iniciar (renderiza_cartas):
                 print('Qual movimento deseja executar 1 ou 2?')
                 print('1. {}'.format(c0)) 
                 print('2. {}'.format(c1))
-                pergunta1 = int(input(' '))
-                while pergunta1 not in [1,2]:
-                    pergunta1 = int(input('Número inválido, digite 1 ou 2 '))
-                novasequencia=baralho.empilha(x,numero-1,mov[pergunta1-1])  
+
+                pergunta1 = int(input_validado(
+                  ' ',
+                  valida_input_movimento,
+                  ()
+                ))
+
+                novasequencia = baralho.empilha(x, numero-1, numero-1 - mov[pergunta1-1])  
         x=novasequencia
 
     if len(x)>1:
         utils.limpa_tela()
         renderiza_cartas(x)
-        print('\nNão há mais nenhum movimento possível. Você perdeu!')
+        print(f'\nNão há mais nenhum movimento possível. Você perdeu!\n\nPontuação final: {52 - len(x)}/52')
 
     if len(x)==1:
         utils.limpa_tela()
