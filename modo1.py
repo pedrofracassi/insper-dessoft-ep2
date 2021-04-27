@@ -1,6 +1,7 @@
 import baralho
 import utils
 import render
+import random
 
 def iniciar_jogo ():
     x = baralho.cria_baralho()
