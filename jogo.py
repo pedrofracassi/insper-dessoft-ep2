@@ -32,11 +32,11 @@ def iniciar (renderiza_cartas):
     if len(x)>1:
         utils.limpa_tela()
         renderiza_cartas(x)
-        print('Não há mais nenhum movimento possível. Você perdeu!')
+        print('\nNão há mais nenhum movimento possível. Você perdeu!')
 
     if len(x)==1:
         utils.limpa_tela()
         renderiza_cartas(x)
-        print('Parabéns, você ganhou!')
+        print('\nParabéns, você ganhou!')
 
-    input('Pressione [Enter] para continuar')
+    input('\nPressione [Enter] para continuar')
