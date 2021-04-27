@@ -1,5 +1,6 @@
 import baralho
 import utils
+import colorama
 
 def input_validado (texto_primeiro, validacao, tuple_args):
   resultado = input(texto_primeiro)
@@ -35,14 +36,16 @@ def valida_input_movimento (resultado):
   return True, ''
 
 def iniciar (renderiza_cartas):
+    ultimo_empilhamento = None
+
     x = baralho.cria_baralho()
 
     while baralho.possui_movimentos_possiveis(x):
         utils.limpa_tela()
-        renderiza_cartas(x)
+        renderiza_cartas(x, ultimo_empilhamento)
 
         numero = int(input_validado(
-          f'Escolha uma carta e digite um número entre {1} e {len(x)}: ',
+          f'\nEscolha uma carta e digite um número entre {1} e {len(x)}: ',
           valida_input_carta,
           (1, len(x), x)
         ))
@@ -57,12 +60,12 @@ def iniciar (renderiza_cartas):
             if len(mov)==1:
                 destino = numero-1 - mov[0]
                 novasequencia=baralho.empilha(x, (numero-1), destino)
+                ultimo_empilhamento = destino
 
             elif len(mov)>1:
-                print('Sobre qual carta você deseja baralho.empilhar? ')
+                print('\nSobre qual carta você deseja empilhar? ')
                 c0=x[numero-2]
                 c1=x[numero-4]           
-                print('Qual movimento deseja executar 1 ou 2?')
                 print('1. {}'.format(c0)) 
                 print('2. {}'.format(c1))
 
@@ -73,17 +76,18 @@ def iniciar (renderiza_cartas):
                 ))
 
                 destino = numero-1 - mov[pergunta1-1]
-                novasequencia = baralho.empilha(x, numero-1, destino)  
+                novasequencia = baralho.empilha(x, numero-1, destino)
+                ultimo_empilhamento = destino
         x=novasequencia
 
     if len(x)>1:
         utils.limpa_tela()
         renderiza_cartas(x)
-        print(f'\nNão há mais nenhum movimento possível. Você perdeu!\n\nPontuação final: {52 - len(x)}/52')
+        print(f'\nNão há mais nenhum movimento possível. {colorama.Fore.RED}Você perdeu!{colorama.Fore.RESET}\n\nPontuação final: {52 - len(x)}/52')
 
     if len(x)==1:
         utils.limpa_tela()
         renderiza_cartas(x)
-        print('\nParabéns, você ganhou!')
+        print(f'\n{colorama.Fore.LIGHTGREEN_EX}Parabéns, você ganhou!')
 
-    input('\nPressione [Enter] para continuar')
+    input('\nPressione [Enter] para voltar ao menu.')
