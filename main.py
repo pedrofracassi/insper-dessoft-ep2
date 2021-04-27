@@ -2,18 +2,18 @@ import telas
 import modo1
 import modo2
 import utils
+import jogo
 
 while True:
   resposta = telas.menu()
 
   if resposta == '1':
     telas.regras()
-    modo1.iniciar_jogo()
+    jogo.iniciar(modo1.renderiza)
+
   elif resposta == '2':
-    utils.limpa_tela()
-    telas.imprime_logo()
-    modo2.iniciar_jogo()
-    input()
+    jogo.iniciar(modo2.renderiza)
+
   else:
     utils.limpa_tela()
     telas.imprime_logo()
