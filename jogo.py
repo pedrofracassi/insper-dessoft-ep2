@@ -49,6 +49,8 @@ def iniciar (renderiza_cartas):
                 print('1. {}'.format(c0)) 
                 print('2. {}'.format(c1))
                 pergunta1 = int(input(' '))
+                while pergunta1 not in [1,2]:
+                    pergunta1 = int(input('Número inválido, digite 1 ou 2 '))
                 novasequencia=baralho.empilha(x,numero-1,mov[pergunta1-1])  
         x=novasequencia
 
