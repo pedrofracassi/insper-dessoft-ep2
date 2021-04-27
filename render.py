@@ -1,7 +1,15 @@
 import baralho
+import colorama
 
 # TODO: Cores das cartas
 # TODO: Posicionamento melhor dos naipes
+
+def carta_colorida(carta):
+    naipe = baralho.extrai_naipe(carta)
+    if naipe == '♦' or naipe == '♥':
+        return colorama.Fore.RED + carta + colorama.Fore.RESET
+    if naipe == '♠' or naipe == '♣':
+        return colorama.Fore.WHITE + carta + colorama.Fore.RESET
 
 def carta_ascii (carta):
   naipe = baralho.extrai_naipe(carta)
