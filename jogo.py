@@ -16,6 +16,9 @@ def valida_input_numero (resultado, min, max, x):
 
   if int(resultado) > max or int(resultado) < min:
     return False
+  
+  if  baralho.lista_movimentos_possiveis(x,(int(resultado)-1))==[]:
+    return False, f'A carta {resultado} não pode ser movida. Por favor, digite um número entre 1 e {len(x)} :'
 
   return True
 
