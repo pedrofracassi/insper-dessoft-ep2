@@ -53,12 +53,15 @@ def iniciar (renderiza_cartas):
         
         if len(baralho.lista_movimentos_possiveis(x,(numero-1))) > 0:
             mov = baralho.lista_movimentos_possiveis(x,(numero-1))
+
             if len(mov)==1:
-                novasequencia=baralho.empilha(x,(numero-1),mov[0])
+                destino = numero-1 - mov[0]
+                novasequencia=baralho.empilha(x, (numero-1), destino)
+
             elif len(mov)>1:
                 print('Sobre qual carta você deseja baralho.empilhar? ')
-                c0=x[numero-1]
-                c1=x[numero-3]           
+                c0=x[numero-2]
+                c1=x[numero-4]           
                 print('Qual movimento deseja executar 1 ou 2?')
                 print('1. {}'.format(c0)) 
                 print('2. {}'.format(c1))
@@ -69,7 +72,8 @@ def iniciar (renderiza_cartas):
                   ()
                 ))
 
-                novasequencia = baralho.empilha(x, numero-1, numero-1 - mov[pergunta1-1])  
+                destino = numero-1 - mov[pergunta1-1]
+                novasequencia = baralho.empilha(x, numero-1, destino)  
         x=novasequencia
 
     if len(x)>1:
