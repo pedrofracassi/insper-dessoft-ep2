@@ -1,7 +1,8 @@
 import baralho
-
 import colorama
-x= baralho.cria_baralho()
+
+x = baralho.cria_baralho()
+
 def pinta_baralho(x):
     for carta in x:
         if baralho.extrai_naipe(carta) == '♠':
@@ -13,8 +14,10 @@ def pinta_baralho(x):
         else:
             carta = colorama.Fore.YELLOW,'{}'.format(carta),colorama.Fore.RESET                
     return x
-y= baralho.cria_baralho()
+
+y = baralho.cria_baralho()
 x = pinta_baralho(y)            
+
 while baralho.possui_movimentos_possiveis(x):
     i=1
     for carta in x:
@@ -40,22 +43,10 @@ while baralho.possui_movimentos_possiveis(x):
             print('2. {}'.format(c1))
             pergunta1 = int(input(' '))
             novasequencia=baralho.empilha(x,numero-1,mov[pergunta1-1])  
-    x=novasequencia       
+    x=novasequencia
+
 if len(x)>1:
-    print('Que pena,você perdeu!Continue tentando')
+    print('Que pena,você perdeu! Continue tentando')
+
 if len(x)==1:
-    print('Parabéns,você ganhou!')                      
-
-
-
-   
-
-
-
-
-
-
-
-
-
-    
+    print('Parabéns,você ganhou!')
