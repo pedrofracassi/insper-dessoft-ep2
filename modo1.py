@@ -1,4 +1,5 @@
 import baralho
+import utils
 import colorama
 
 x = baralho.cria_baralho()
@@ -18,10 +19,18 @@ def pinta_baralho(x):
 y = baralho.cria_baralho()
 x = pinta_baralho(y)            
 
+def carta_colorida(carta):
+    naipe = baralho.extrai_naipe(carta)
+    if naipe == '♦' or naipe == '♥':
+        return colorama.Fore.RED + carta + colorama.Fore.RESET
+    if naipe == '♠' or naipe == '♣':
+        return colorama.Fore.WHITE + carta + colorama.Fore.RESET
+
 while baralho.possui_movimentos_possiveis(x):
+    utils.limpa_tela()
     i=1
     for carta in x:
-        print('{}.'.format(i),carta)
+        print('{}.'.format(i), carta_colorida(carta))
         i+=1
     numero=int(input('Escolha uma carta e digite um número entre {} e {}: '.format(1,len(x))))
     if numero>len(x):
