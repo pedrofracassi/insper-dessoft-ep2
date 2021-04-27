@@ -2,20 +2,6 @@ import baralho
 import utils
 import colorama
 
-x = baralho.cria_baralho()
-
-def pinta_baralho(x):
-    for carta in x:
-        if baralho.extrai_naipe(carta) == '♠':
-            carta = colorama.Fore.RED, '{}'.format(carta),colorama.Fore.RESET
-        if baralho.extrai_naipe(carta)== '♦':
-            carta = colorama.Fore.CYAN,'{}'.format(carta),colorama.Fore.RESET
-        if baralho.extrai_naipe(carta) == '♥':
-            carta = colorama.Fore.MAGENTA,'{}'.format(carta),colorama.Fore.RESET
-        else:
-            carta = colorama.Fore.YELLOW,'{}'.format(carta),colorama.Fore.RESET                
-    return x
-
 y = baralho.cria_baralho()
 x = pinta_baralho(y)            
 
