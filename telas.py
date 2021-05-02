@@ -30,6 +30,7 @@ def regras():
   print('Cartas em', colorama.Fore.YELLOW, 'amarelo', colorama.Fore.RESET, 'têm movimentos possíveis')
   print('Cartas em', colorama.Fore.CYAN, 'azul', colorama.Fore.RESET, 'são as últimas empilhadas')
   print('')
+  
   print('Aperte [Enter] para iniciar o jogo...')
 
   input()
@@ -40,6 +41,9 @@ def menu():
   print(f"{colorama.Back.CYAN}{colorama.Fore.BLACK}Escolha um modo de jogo")
   print(colorama.Back.RESET, colorama.Fore.RESET)
   print(colorama.Fore.RED,  ' 1 - Texto (todas as cartas abertas)', colorama.Fore.RESET)
-  print('  2 - ASCII')
+  print('  No modo 1, todas as cartas serão visualizadas desde o início')
+  print('')
+  print(colorama.Fore.MAGENTA,  ' 2 - ASCII ', colorama.Fore.RESET)
+  print('  No modo 2, sua mesa se iniciará com 4 cartas e você poderá comprar as demais do monte')
   modo = input()
   return modo
