@@ -34,10 +34,11 @@ def empilha(lista, ppartida, pchegada):
     del lista[ppartida]
     return lista
    
-def possui_movimentos_possiveis(baralho):
+def possui_movimentos_possiveis(mesa, monte):
+    baralho = mesa + monte
     i=0
     o=1
-    while len(baralho)>o:
+    while len(baralho) > o:
         if extrai_naipe(baralho[i])==extrai_naipe(baralho[o]) or extrai_valor(baralho[i])==extrai_valor(baralho[o]):
             return True
         i+=1

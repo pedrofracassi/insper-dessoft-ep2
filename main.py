@@ -9,10 +9,10 @@ while True:
 
   if resposta == '1':
     telas.regras()
-    jogo.iniciar(modo1.renderiza)
+    jogo.iniciar(modo1.renderiza, 52)
 
   elif resposta == '2':
-    jogo.iniciar(modo2.renderiza)
+    jogo.iniciar(modo2.renderiza, 5)
 
   else:
     utils.limpa_tela()

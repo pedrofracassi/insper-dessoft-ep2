@@ -10,17 +10,23 @@ def input_validado (texto_primeiro, validacao, tuple_args):
 
   return resultado
 
-def valida_input_carta (resultado, min, max, x):
+def valida_input_carta (resultado, min, max, mesa, monte):
+  if resultado.upper() == 'M':
+    if len(monte) > 0:
+      return True, ''
+    else:
+      return False, f'Não há nenhuma carta no monte. Escolha um número entre {1} e {len(mesa)}: '
+
   try:
     int(resultado)
   except:
-    return False, f'O valor digitado não é um número. Escolha um número entre {1} e {len(x)}: '
+    return False, f'O valor digitado não é um número. Escolha um número entre {1} e {len(mesa)}: '
 
   if int(resultado) > max or int(resultado) < min:
-    return False, f'Número inválido. Escolha um número entre {1} e {len(x)}: ',
+    return False, f'Número inválido. Escolha um número entre {1} e {len(mesa)}: ',
   
-  if baralho.lista_movimentos_possiveis(x, (int(resultado)-1))==[]:
-    return False, f'A carta {resultado} não pode ser movida. Por favor, digite um número entre 1 e {len(x)}: '
+  if baralho.lista_movimentos_possiveis(mesa, (int(resultado)-1))==[]:
+    return False, f'A carta {resultado} não pode ser movida. Por favor, digite um número entre 1 e {len(mesa)}: '
 
   return True, ''
 
@@ -35,37 +41,53 @@ def valida_input_movimento (resultado):
 
   return True, ''
 
-def iniciar (renderiza_cartas):
+def iniciar (renderiza_cartas, cartas_iniciais):
     ultimo_empilhamento = None
+  
+    monte = baralho.cria_baralho()
+    mesa = []
 
-    x = baralho.cria_baralho()
+    i = 0
+    while i < cartas_iniciais:
+      mesa.append(monte[0])
+      del monte[0]
+      i += 1
 
-    while baralho.possui_movimentos_possiveis(x):
+    while baralho.possui_movimentos_possiveis(mesa, monte):
         utils.limpa_tela()
-        renderiza_cartas(x, ultimo_empilhamento)
+        renderiza_cartas(mesa, ultimo_empilhamento)
 
-        numero = int(input_validado(
-          f'\nEscolha uma carta e digite um número entre {1} e {len(x)}: ',
+        if len(monte) > 0:
+          print('\nCartas no monte:', len(monte))
+
+        resultado_input = input_validado(
+          f'\nEscolha uma carta e digite um número entre {1} e {len(mesa)}: ',
           valida_input_carta,
-          (1, len(x), x)
-        ))
+          (1, len(mesa), mesa, monte)
+        )
 
-        # while baralho.lista_movimentos_possiveis(x,(numero-1))==[]:
-        #    print('A carta {} não pode ser movida. Por favor, digite um número entre 1 e {} :'.format(numero,len(x)))
-        #    numero=int(input('Escolha uma carta e digite um número entre {} e {}: '.format(1,len(x))))
-        
-        if len(baralho.lista_movimentos_possiveis(x,(numero-1))) > 0:
-            mov = baralho.lista_movimentos_possiveis(x,(numero-1))
+        if resultado_input.upper() == 'M':
+          mesa.append(monte[0])
+          del monte[0]
 
-            if len(mov)==1:
+        elif len(baralho.lista_movimentos_possiveis(mesa, (int(resultado_input) - 1))) > 0:
+
+            numero = int(resultado_input)
+
+            # Movimentos possíveis para a carta selecionada
+            mov = baralho.lista_movimentos_possiveis(mesa, (numero - 1))
+
+            # Se só houver um movimento possível, executa ele automaticamente
+            if len(mov) == 1:
                 destino = numero-1 - mov[0]
-                novasequencia=baralho.empilha(x, (numero-1), destino)
+                novasequencia=baralho.empilha(mesa, (numero-1), destino)
                 ultimo_empilhamento = destino
 
-            elif len(mov)>1:
+            # Se houver mais que um movimento possível, pergunta qual movimento o jogador quer
+            elif len(mov) > 1:
                 print('\nSobre qual carta você deseja empilhar? ')
-                c0=x[numero-2]
-                c1=x[numero-4]           
+                c0=mesa[numero-2]
+                c1=mesa[numero-4]           
                 print('1. {}'.format(c0)) 
                 print('2. {}'.format(c1))
 
@@ -76,18 +98,19 @@ def iniciar (renderiza_cartas):
                 ))
 
                 destino = numero-1 - mov[pergunta1-1]
-                novasequencia = baralho.empilha(x, numero-1, destino)
+                novasequencia = baralho.empilha(mesa, numero-1, destino)
                 ultimo_empilhamento = destino
-        x=novasequencia
 
-    if len(x)>1:
-        utils.limpa_tela()
-        renderiza_cartas(x)
-        print(f'\nNão há mais nenhum movimento possível. {colorama.Fore.RED}Você perdeu!{colorama.Fore.RESET}\n\nPontuação final: {52 - len(x)}/52')
+            mesa = novasequencia
 
-    if len(x)==1:
+    if len(mesa) > 1 and len(monte) == 0:
         utils.limpa_tela()
-        renderiza_cartas(x)
-        print(f'\n{colorama.Fore.LIGHTGREEN_EX}Parabéns, você ganhou!')
+        renderiza_cartas(mesa)
+        print(f'\nNão há mais nenhum movimento possível. {colorama.Fore.RED}Você perdeu!{colorama.Fore.RESET}\n\nPontuação final: {52 - len(mesa)}/52')
+
+    if len(mesa) == 1 and len(monte) == 0:
+        utils.limpa_tela()
+        renderiza_cartas(mesa)
+        print(f'\n{colorama.Fore.LIGHTGREEN_Emesa}Parabéns, você ganhou!')
 
     input('\nPressione [Enter] para voltar ao menu.')
