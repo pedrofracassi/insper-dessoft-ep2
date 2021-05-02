@@ -36,25 +36,31 @@ def carta_ascii (carta, numero_carta):
     '     {}{}    '.format(valor_id, espaco_id)
   ]
 
-def linha_cartas (cartas, ultimo = None, offset = 0):
+def linha_cartas (mesa, cartas, ultimo = None, offset = 0):
   cartas_ascii = []
 
   for i, carta in enumerate(cartas):
-    numero_carta = offset + i + 1
+    i_total_carta = offset + i
+    numero_carta = i_total_carta + 1
     cartas_ascii.append(carta_ascii(carta, numero_carta))
 
   linhas = []
   
   for ic, carta in enumerate(cartas_ascii):
+    i_total_carta = offset + ic
     for i, linha in enumerate(carta):
 
       if len(linhas) < len(carta):
         linhas.append("")
 
-      if ultimo != None and ic + offset == ultimo:
-        linhas[i] += colorama.Fore.CYAN + linha
+      if len(baralho.lista_movimentos_possiveis(mesa, i_total_carta)):
+        color = colorama.Fore.YELLOW
+      elif ultimo != None and ic + offset == ultimo:
+        color = colorama.Fore.CYAN
       else:
-        linhas[i] += colorama.Fore.RESET + linha
+        color = colorama.Fore.RESET
+
+      linhas[i] += color + linha + colorama.Fore.RESET
 
   return '\n'.join(linhas)
 
@@ -65,9 +71,9 @@ def chunks(lista, n):
 
     return resultado
 
-def renderiza (baralho, ultimo = None):
+def renderiza (mesa, ultimo = None):
   size = os.get_terminal_size()
   max_cartas_por_linha = math.floor(size[0] / largura_carta)
-  for i, cartas in enumerate(chunks(baralho, max_cartas_por_linha)):
+  for i, cartas in enumerate(chunks(mesa, max_cartas_por_linha)):
     offset = i*max_cartas_por_linha
-    print(linha_cartas(cartas, ultimo, offset))
+    print(linha_cartas(mesa, cartas, ultimo, offset))
