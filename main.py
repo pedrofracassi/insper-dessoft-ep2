@@ -12,6 +12,7 @@ while True:
     jogo.iniciar(modo1.renderiza, 52)
 
   elif resposta == '2':
+    telas.regras()
     jogo.iniciar(modo2.renderiza, 5)
 
   else:
