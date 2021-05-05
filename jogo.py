@@ -20,13 +20,13 @@ def valida_input_carta (resultado, min, max, mesa, monte):
   try:
     int(resultado)
   except:
-    return False, f'O valor digitado não é um número. Escolha um número entre {1} e {len(mesa)}: '
+    return False, f'O valor digitado não é um número. Escolha um número entre {1} e {len(mesa)} ou digite M: '
 
   if int(resultado) > max or int(resultado) < min:
-    return False, f'Número inválido. Escolha um número entre {1} e {len(mesa)}: ',
+    return False, f'Número inválido. Escolha um número entre {1} e {len(mesa)} ou digite M: ',
   
   if baralho.lista_movimentos_possiveis(mesa, (int(resultado)-1))==[]:
-    return False, f'A carta {resultado} não pode ser movida. Por favor, digite um número entre 1 e {len(mesa)}: '
+    return False, f'A carta {resultado} não pode ser movida. Por favor, digite um número entre 1 e {len(mesa)} ou digite M: '
 
   return True, ''
 
@@ -61,7 +61,7 @@ def iniciar (renderiza_cartas, cartas_iniciais):
           print('\nCartas no monte:', len(monte))
 
         resultado_input = input_validado(
-          f'\nEscolha uma carta e digite um número entre {1} e {len(mesa)}: ',
+          f'\nEscolha uma carta e digite um número entre {1} e {len(mesa)} ou digite M para puxar do monte: ',
           valida_input_carta,
           (1, len(mesa), mesa, monte)
         )
